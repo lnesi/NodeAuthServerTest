@@ -13,7 +13,7 @@ exports.signup = function(req,res,next){
 		const user=new User({email,password,full_name});
 		user.save((err)=>{
 			if(err) return next(err);
-			return res.json(user)
+			return res.json({success:true})
 		});
 	});
 
