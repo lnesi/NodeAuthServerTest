@@ -10,16 +10,23 @@ const userSchema=new Schema({
 });
 
 //ON save Hook encrypt password
-userSchema.pre('save',function(next){
+//before saving a model run this
+userSchema.pre('save',(next)=>{
+	//The contect is the model
 	const user = this;
-	bcrypt.genSalt(10,function(err,salt){
+
+	//generate a salt this tales time thats why the callback
+	bcrypt.genSalt(10,(err,salt)=>{
 		if(err) return next(err);
 		
-		bcrypt.hash(user.password,salt,null,function(err,hash){
+
+		// then we encrypt using the salt this takes time and as callback
+		bcrypt.hash(user.password,salt,null,(err,hash)=>{
 			if(err) return next(err);
-			
-			user.password=hash;
-			next();
+				// override current password with encrypted version
+				user.password=hash;
+				//Continue saving process
+				next();
 		})
 	})
 });
