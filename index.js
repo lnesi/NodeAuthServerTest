@@ -4,7 +4,7 @@ const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser'); // Parse incoming request into json no matter what request
 const morgan = require('morgan'); //Log framework so we can see what happen on the request level on the server
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); 
 
 //db setup
 mongoose.connect('mongodb://localhost:auth/auth_test');
